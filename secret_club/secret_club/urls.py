@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from content import views
-
+from app import views as vi
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('content/', views.list_content)
+    path('auth/', vi.authenticate),
+    path('get-content/', views.list_content),
+    path('get-content/<int:id_>', views.get_content),
+    path('add-content/', views.create_content)
 ]
