@@ -1,5 +1,5 @@
 from django.db import models
-from app.models import User
+from django.contrib.auth.models import User
 
 class Content(models.Model):
     name = models.CharField(max_length=50)
@@ -10,9 +10,9 @@ class Content(models.Model):
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-    content_id = models.ForeignKey(Content,on_delete=models.CASCADE)
+    content = models.ForeignKey(Content,on_delete=models.CASCADE)
 
 class Rate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField()
-    content_id = models.ForeignKey(Content,on_delete=models.CASCADE)
+    content = models.ForeignKey(Content,on_delete=models.CASCADE)
