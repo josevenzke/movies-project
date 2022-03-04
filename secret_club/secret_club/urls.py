@@ -16,11 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from content import views
-from app import views as vi
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+
 urlpatterns = [
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
-    path('auth/', vi.authenticate),
     path('get-content/', views.list_content),
     path('get-content/<int:id_>', views.get_content),
-    path('add-content/', views.create_content)
+    path('add-content/', views.create_content),
+    path('get-comments/<int:content_id>', views.get_comments),
+    path('add-comment/<int:content_id>', views.create_comment),
+    path('get-ratings/<int:content_id>', views.get_ratings),
+    path('add-rating/<int:content_id>', views.create_rating),
 ]
